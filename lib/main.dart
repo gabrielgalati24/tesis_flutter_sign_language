@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sign_language/services/usuario_services.dart';
 import 'package:flutter_sign_language/widgets/progress_bar.dart';
+import 'package:provider/provider.dart';
+
+import 'pages/home_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,17 +12,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Row(
-            children: [],
-          ),
-        ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => UsuarioService(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Material App',
+        debugShowCheckedModeBanner: false,
+        initialRoute: '',
+        routes: {
+          '/': (context) => HomePage(),
+        },
       ),
     );
   }
